@@ -23,9 +23,8 @@ exports.authenticate = (req, res, next) => {
         req.session.flash = {
           type: 'warning',
           intro: 'Unauthorized',
-          message: 'Please log in again',
+          message: 'Something went wrong',
         }
-        res.clearCookie('connect.sid')
         return res.redirect(303, '/login')
       }
       return res.redirect(303, '/')

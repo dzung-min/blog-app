@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const logger = require('morgan')
 const passport = require('passport')
+const MongoStore = require('connect-mongo')
 
 const port = process.env.PORT || 5000
 const sessionSecret = process.env.SESSION_SECRET || 'keyboard cat'
@@ -39,6 +40,12 @@ app.use(
     secret: sessionSecret,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    },
+    store: MongoStore.create({
+      mongoUrl: dbUrl,
+    }),
   })
 )
 app.use(passport.initialize())
