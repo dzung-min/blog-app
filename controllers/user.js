@@ -2,12 +2,18 @@ const User = require('../models/User')
 
 exports.create = async (req, res, next) => {
   try {
-    await User.create(req.body)
+    const user = await User.create(req.body)
     req.session.flash = {
       type: 'success',
       intro: 'Registered successfully',
       message: 'Enjoy your time with us',
     }
+    req.login(user, function (err) {
+      if (err) {
+        return next(err)
+      }
+      return res.redirect(303, '/')
+    })
     res.redirect(303, '/')
   } catch (error) {
     if (error.name === 'ValidationError') {
