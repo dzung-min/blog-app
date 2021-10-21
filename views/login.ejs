@@ -1,7 +1,7 @@
 <h1 class="text-center">Log in</h1>
 
 <div class="col col-sm-8 col-md-6 col-lg-4 mx-auto my-5">
-  <form action="/login" method="post">
+  <form action="/login" method="post" class="needs-validation" novalidate>
     <div class="mb-3">
       <label for="email" class="form-label">Email</label>
       <input
@@ -11,6 +11,9 @@
         name="email"
         required
       />
+      <div class="invalid-feedback">
+        Required and must be a valid email address
+      </div>
     </div>
     <div class="mb-3">
       <label for="password" class="form-label">Password</label>
@@ -22,6 +25,9 @@
         required
         minlength="8"
       />
+      <div class="invalid-feedback">
+        Required and must contains at least 8 characters
+      </div>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
